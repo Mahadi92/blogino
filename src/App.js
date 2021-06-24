@@ -6,12 +6,16 @@ import {
   Link
 } from "react-router-dom";
 import Home from './Pages/Home';
+import LogIn from './Pages/LogIn';
+import Navbar from './components/Navbar/Navbar';
 
 
 
 function App() {
   return (
     <Router>
+
+      <Navbar />
 
       <Switch>
 
@@ -23,8 +27,11 @@ function App() {
           <Home />
         </Route>
 
-      </Switch>
+        <Route path="/login">
+          <LogIn />
+        </Route>
 
+      </Switch>
 
     </Router>
   );

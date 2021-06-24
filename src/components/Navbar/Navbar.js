@@ -11,8 +11,8 @@ const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
     return (
-        <nav>
-            <section className="px-2.5 py-1.5 bg-gray-100 shadow-md border-md">
+        <nav className="fixed w-full z-50 glassmorphism text-white navbar">
+            <section className="px-2.5 py-1.5 shadow-md border-md">
                 <main className="flex items-center justify-between">
                     <Link to="/">
                         <div className="flex items-center space-x-2">
@@ -21,7 +21,7 @@ const Navbar = () => {
                     </Link>
                     <section className="flex items-center justify-between">
                         <div className="lg:block hidden">
-                            <ul className="flex items-center space-x-8">
+                            <ul className="flex items-center space-x-5">
                                 <li className="text-md capitalize nav_link">
                                     <Link to="/" className="text-md capitalize nav_link"> HOME</Link>
                                 </li>
@@ -32,7 +32,7 @@ const Navbar = () => {
                                         </svg>
                                     </button>
 
-                                    <ul class={`origin-top-right w-52 absolute mt-2 shadow-lg bg-gray-100 top-20 rounded-b-lg ${isDropdownOpen ? 'block' : 'hidden'}`}>
+                                    <ul class={`origin-top-right w-52 absolute mt-2 shadow-lg glassmorphism top-20 rounded-b-lg ${isDropdownOpen ? 'block' : 'hidden'}`}>
                                         <li>
                                             <Link to="/" class="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0">TRAVEL</Link>
                                         </li>
@@ -50,11 +50,8 @@ const Navbar = () => {
                                 <li className="">
                                     <Link to="/" className="text-md capitalize nav_link"> CONTACT US</Link>
                                 </li>
-                                <li className="">
-                                    <Link to="/" className="text-md capitalize nav_link"> HOME</Link>
-                                </li>
-                                <li className="">
-                                    <Link to="/" className="text-md capitalize nav_link"> HOME</Link>
+                                <li className="bg-blue-100 p-3 rounded-sm">
+                                    <Link to="/" className="text-md capitalize nav_link"> CREATE NEW BLOG</Link>
                                 </li>
                             </ul>
 
@@ -70,7 +67,7 @@ const Navbar = () => {
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                             </svg>
                                         </div>
-                                        <input type="search" className="w-full h-10 p-1 pl-10 rounded-md bg-gray-200 focus:bg-gray-100 focus:outline-md" placeholder="Search" />
+                                        <input type="search" className="w-full h-10 p-1 pl-10 rounded-md bg-gray-200 focus:outline-none focus:ring focus:border-blue-300" placeholder="Search" />
                                     </div>
                                 </li>
                                 <li className="lg:hidden block">
@@ -83,14 +80,16 @@ const Navbar = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                     </svg>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <div className="border-2 border-gray-200 rounded-full p-1">
                                         <Link className="flex items-center justify-between" to="/">
-
                                             <img className="w-16 rounded-full" src={profileImg} alt="" />
                                             <h2 className="lg:block hidden text-lg font-extrabold text-gray-600 px-3 pb-2">Ana Senthi</h2>
                                         </Link>
                                     </div>
+                                </li> */}
+                                <li>
+                                    <Link to="/login" className="bg-blue-400 text-white px-4 py-2 mr-4 rounded-full">Log In</Link>
                                 </li>
                                 <li className={`${hideNav ? 'lg:hidden hidden' : 'lg:hidden block'}`}>
                                     <button onClick={() => setHideNav(!hideNav)}>

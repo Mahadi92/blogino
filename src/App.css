@@ -1,9 +1,26 @@
+/* Defult font  */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
+/* Primary font */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+}
+
+.font-primary {
+    font-family: 'Lobster', cursive;
+}
+
+
+.glassmorphism{
+    background: rgba( 96, 165, 250, 0.35 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 12.0px );
+-webkit-backdrop-filter: blur( 12.0px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
 }

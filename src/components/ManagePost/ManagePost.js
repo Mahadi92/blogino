@@ -1,11 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ManagePost.css';
-import image from '../../images/profileImg.jpg';
 
 
-const people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
 const ManagePost = () => {
+
+    const [posts, setPosts] = useState([])
+    // const [status, setStatus] = useState('unapproved')
+
+    const postData = () => {
+        fetch('http://localhost:5000/posts')
+            .then(res => res.json())
+            .then(data => setPosts(data))
+    }
+
+    useEffect(() => {
+        postData()
+    }, [])
+
+
+    const handleStatusChange = (id, updateStatus) => {
+
+        fetch(`http://localhost:5000/updateStatus/${id}`, {
+
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: updateStatus })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    postData()
+                }
+            })
+    }
+
     return (
         <div>
             <div className="flex flex-col w-full">
@@ -52,34 +81,40 @@ const ManagePost = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {people.map((person) => (
-                                        <tr key={person.email}>
+                                    {posts.map((post) => (
+                                        <tr>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center">
                                                     <div className="">
-                                                        <div className="text-sm text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+                                                        <div className="text-sm text-gray-500">{post.title}</div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="pl-4 py-4 whitespace-nowrap">
+                                            <td className="pl-4 py-4 whitespace-nowrap text-center">
                                                 <div className="text-sm w-full text-center">
-                                                    <img className="h-10 w-10 m-auto object-cover rounded-full" src={image} alt="" />
+                                                    <img className="h-10 w-10 m-auto object-cover rounded-full" src={post.userData.photoURL} alt="" />
                                                 </div>
-                                                <div className="text-sm text-gray-500">Ana Gomes</div>
+                                                <div className="text-sm text-gray-500">{post.authorName}</div>
                                             </td>
                                             <td className="px-2 py-4 whitespace-nowrap">
-                                                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    Approved
+                                                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${post.status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                                    {post.status}
                                                 </span>
                                             </td>
                                             <td className="pl-5 py-4 whitespace-nowrap">
                                                 <div className="text-sm text-gray-500">
-                                                    <button className="p-3 bg-green-100 text-green-800 font-bold rounded-full hover:bg-green-300">Approve</button>
+                                                    <button onClick={() => {
+                                                        // setStatus('approved')
+                                                        handleStatusChange(post._id, 'approved')
+                                                    }} className="p-3 bg-green-100 text-green-800 font-bold rounded-full hover:bg-green-300">Approve</button>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td onClick={() => {
+                                                // setStatus('unapproved')
+                                                handleStatusChange(post._id, 'unapproved')
+                                            }} className="px-6 py-4 whitespace-nowrap">
                                                 <div className="text-sm text-gray-500">
-                                                    <button className="p-3 bg-red-100 text-red-800 font-bold rounded-full hover:bg-red-300">Unapprove</button>
+                                                    <button className="p-3 bg-red-100 text-red-800 font-bold rounded-full hover:bg-red-300">Unapproved</button>
                                                 </div>
                                             </td>
                                             <td className="pr-6 py-4 whitespace-nowrap text-right text-sm font-medium">

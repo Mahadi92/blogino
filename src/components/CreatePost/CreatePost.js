@@ -5,6 +5,7 @@ import axios from 'axios';
 import { UserContext } from '../../App';
 import uploadLoader from '../../images/upload-loading.gif';
 import Navbar from '../Navbar/Navbar';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CreatePost = () => {
 
@@ -20,7 +21,26 @@ const CreatePost = () => {
         data.status = 'unapproved';
         data.date = new Date().toDateString();
         data.userData = loggedInUser;
-        console.log(data);
+
+
+        fetch('http://localhost:5000/addPost', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    toast.success('Your Post Successfully Done')
+                    // setImageUrl('')
+                    // setImgName('')
+                    // setSubmitActive(false)
+                }
+            })
+
+
+
+
     };
 
 
@@ -47,6 +67,10 @@ const CreatePost = () => {
     return (
         <section className="">
             <Navbar />
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
 
             <div className="flex h-screen items-center justify-center  mt-32 mb-32">
                 <div className="grid bg-white rounded-lg shadow-2xl w-11/12 md:w-9/12 lg:w-1/2">

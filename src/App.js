@@ -37,9 +37,9 @@ function App() {
             <LogIn />
           </Route>
 
-          <Route path="/createBlog">
+          <PrivateRoute path="/createBlog">
             <CreatePost />
-          </Route>
+          </PrivateRoute>
 
           <Route path="/dashboard">
             <Dashboard />

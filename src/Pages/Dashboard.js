@@ -13,22 +13,18 @@ const Dashboard = () => {
     let { path } = useRouteMatch();
 
     return (
-        <Router>
-            <section className="grid grid-cols-12 gap-1 pt-20">
-                <div className="col-span-3">
-                    <Switch>
-                        <Sidebar />
-                    </Switch>
-                </div>
-                <div className="col-span-9">
-                    <Switch>
-                        <Route path={`/dashboard/managePost`}>
-                            <ManagePost />
-                        </Route>
-                    </Switch>
-                </div>
-            </section>
-        </Router>
+        <section className="grid grid-cols-12 gap-1 pt-20">
+            <div className="col-span-3">
+                <Sidebar />
+            </div>
+            <div className="col-span-9">
+                <Switch>
+                    <Route path={`/dashboard/managePost`}>
+                        <ManagePost />
+                    </Route>
+                </Switch>
+            </div>
+        </section>
     );
 };
 

@@ -9,7 +9,6 @@ const Post = ({ post }) => {
         <div className="w-full bg-gray-100 mb-5">
             <Link to="/post">
                 <img src={imageUrl} className="w-full h-60 object-cover" alt="" />
-
                 <div className="p-8">
                     <h2 className="text-3xl text-gray-800 pb-3 font-primary">{title}</h2>
                     <p>Post on <span className="font-bold">{date}</span></p>

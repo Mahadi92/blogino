@@ -2,38 +2,59 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Home from './Pages/Home';
-import LogIn from './Pages/LogIn';
+import LogIn from './Pages/LogIn/LogIn';
 import Navbar from './components/Navbar/Navbar';
+import { createContext, useState } from 'react';
+import PrivateRoute from './Pages/LogIn/PrivateRoute';
+import CreatePost from './components/CreatePost/CreatePost';
+import Dashboard from './Pages/Dashboard';
 
+export const UserContext = createContext()
 
 
 function App() {
+
+  const [loggedInUser, setLoggedInUser] = useState({})
+
   return (
-    <Router>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
 
-      <Navbar />
+      <Router>
+        <Navbar />
 
-      <Switch>
+        <Switch>
 
-        <Route exact path="/">
-          <Home />
-        </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
 
-        <Route path="/home">
-          <Home />
-        </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
 
-        <Route path="/login">
-          <LogIn />
-        </Route>
+          <Route path="/login">
+            <LogIn />
+          </Route>
 
-      </Switch>
+          <Route path="/createBlog">
+            <CreatePost />
+          </Route>
 
-    </Router>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+
+          <Route path="*">
+            <Home />
+          </Route>
+
+        </Switch>
+
+      </Router>
+    </UserContext.Provider>
   );
 }
 

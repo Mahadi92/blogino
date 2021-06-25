@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Navbar.css';
 import { Link } from "react-router-dom";
 import bloginoLogo from '../../images/blogino.png';
-import profileImg from '../../images/profileImg.jpg';
+import { UserContext } from '../../App';
 
 
 const Navbar = () => {
+
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
 
     const [hideNav, setHideNav] = useState(false)
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -27,31 +29,34 @@ const Navbar = () => {
                                 </li>
                                 <li className="">
                                     <button type="button" onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="inline-flex justify-center items-center text-md capitalize nav_link"> CATEGORY
-                                        <svg class="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                         </svg>
                                     </button>
 
-                                    <ul class={`origin-top-right w-52 absolute mt-2 shadow-lg glassmorphism top-20 rounded-b-lg ${isDropdownOpen ? 'block' : 'hidden'}`}>
+                                    <ul className={`origin-top-right w-52 absolute mt-2 shadow-lg glassmorphism top-20 rounded-b-lg ${isDropdownOpen ? 'block' : 'hidden'}`}>
                                         <li>
-                                            <Link to="/" class="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0">TRAVEL</Link>
+                                            <Link to="/" className="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabIndex="-1" id="menu-item-0">TRAVEL</Link>
                                         </li>
                                         <li>
-                                            <Link to="/" class="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0">FASHION</Link>
+                                            <Link to="/" className="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabIndex="-1" id="menu-item-0">FASHION</Link>
                                         </li>
                                         <li>
-                                            <Link to="/" class="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0">SPORTS</Link>
+                                            <Link to="/" className="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabIndex="-1" id="menu-item-0">SPORTS</Link>
                                         </li>
                                         <li>
-                                            <Link to="/" class="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0">LIFE STYLE</Link>
+                                            <Link to="/" className="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabIndex="-1" id="menu-item-0">LIFE STYLE</Link>
                                         </li>
                                     </ul>
                                 </li>
                                 <li className="">
                                     <Link to="/" className="text-md capitalize nav_link"> CONTACT US</Link>
                                 </li>
-                                <li className="bg-blue-100 p-3 rounded-sm">
-                                    <Link to="/" className="text-md capitalize nav_link"> CREATE NEW BLOG</Link>
+                                <li className="bg-blue-100 p-3 shadow-md rounded-sm">
+                                    <Link to="/createBlog" className="text-md capitalize nav_link"> CREATE NEW BLOG</Link>
+                                </li>
+                                <li className="bg-red-100 p-3 shadow-md rounded-sm">
+                                    <Link to="/dashboard" className="text-md capitalize nav_link">DASHBOARD</Link>
                                 </li>
                             </ul>
 
@@ -80,17 +85,19 @@ const Navbar = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                     </svg>
                                 </li>
-                                {/* <li>
-                                    <div className="border-2 border-gray-200 rounded-full p-1">
-                                        <Link className="flex items-center justify-between" to="/">
-                                            <img className="w-16 rounded-full" src={profileImg} alt="" />
-                                            <h2 className="lg:block hidden text-lg font-extrabold text-gray-600 px-3 pb-2">Ana Senthi</h2>
-                                        </Link>
-                                    </div>
-                                </li> */}
-                                <li>
-                                    <Link to="/login" className="bg-blue-400 text-white px-4 py-2 mr-4 rounded-full">Log In</Link>
-                                </li>
+                                {
+                                    loggedInUser.email ? <li>
+                                        <div className="border-2 border-gray-200 rounded-full p-1">
+                                            <Link className="flex items-center justify-between" to="/">
+                                                <img className="w-16 h-12 object-cover rounded-full" src={loggedInUser.photoURL} alt="" />
+                                                <h2 className="lg:block hidden text-lg font-extrabold text-gray-600 px-3 pb-1">{loggedInUser.displayName}</h2>
+                                            </Link>
+                                        </div>
+                                    </li> :
+                                        <li>
+                                            <Link to="/login" className="bg-blue-400 text-white px-4 py-2 mr-4 rounded-full">Log In</Link>
+                                        </li>
+                                }
                                 <li className={`${hideNav ? 'lg:hidden hidden' : 'lg:hidden block'}`}>
                                     <button onClick={() => setHideNav(!hideNav)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500 hover:text-gray-400 focus:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">

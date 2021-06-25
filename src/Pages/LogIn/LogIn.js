@@ -1,8 +1,52 @@
-import React from 'react';
-import facebookLogo from '../images/facebook.png';
-import googleLogo from '../images/google.png';
+import React, { useContext } from 'react';
+import facebookLogo from '../../images/facebook.png';
+import googleLogo from '../../images/google.png';
+import firebase from "firebase/app";
+import "firebase/analytics";
+import "firebase/auth";
+import firebaseConfig from './firebase.config';
+import { UserContext } from '../../App';
+import { useHistory, useLocation } from 'react-router-dom';
+
+
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+} else {
+    firebase.app();
+}
+
 
 const LogIn = () => {
+
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+
+    let history = useHistory();
+    let location = useLocation();
+
+    let { from } = location.state || { from: { pathname: "/" } };
+
+    const handleGoogleLogin = () => {
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+        firebase.auth()
+            .signInWithPopup(googleProvider)
+            .then((result) => {
+                var credential = result.credential;
+                var token = credential.accessToken;
+                var user = result.user;
+                setLoggedInUser(user)
+                history.replace(from);
+                console.log(token, user);
+            }).catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                var email = error.email;
+                var credential = error.credential;
+                console.log(errorCode, errorMessage, email, credential);
+            });
+    }
+
     return (
         <main>
             <section className="absolute w-full h-full">
@@ -10,7 +54,7 @@ const LogIn = () => {
                     className="absolute top-0 w-full h-full bg-gray-900"
                     style={{
                         backgroundImage:
-                            "url(" + require("../images/logIn-bg.jpg").default + ")",
+                            "url(" + require("../../images/logIn-bg.jpg").default + ")",
                         backgroundSize: "100%",
                         backgroundRepeat: "no-repeat"
                     }}
@@ -38,7 +82,7 @@ const LogIn = () => {
                                             />
                                             Facebook
                                         </button>
-                                        <button
+                                        <button onClick={() => handleGoogleLogin()}
                                             className="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
                                             type="button"
                                             style={{ transition: "all .15s ease" }}

@@ -17,7 +17,8 @@ const CreatePost = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         data.imageUrl = imageUrl;
-        data.date = new Date().toDateString()
+        data.status = 'unapproved';
+        data.date = new Date().toDateString();
         data.userData = loggedInUser;
         console.log(data);
     };
@@ -41,16 +42,6 @@ const CreatePost = () => {
             });
 
     }
-
-
-
-
-    const d = new Date();
-    const date = d.toDateString()
-    // const srtDate = (date.toString());
-    // console.log(srtDate);
-
-
 
 
     return (
@@ -83,7 +74,7 @@ const CreatePost = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
                             <div className="grid grid-cols-1">
                                 <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Time to Create</label>
-                                <input className="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" defaultValue={date} disabled />
+                                <input className="py-2 px-3 rounded-lg border-2 border-blue-300 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="text" defaultValue={new Date().toDateString()} disabled />
                             </div>
                             <div className="grid grid-cols-1">
                                 <label className="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Category</label>
@@ -121,7 +112,7 @@ const CreatePost = () => {
                         </div>
 
                         <div className='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                            <button type="submit" className={`w-auto ${submitActive ? 'bg-blue-500 hover:bg-blue-700' : 'bg-blue-300 disabled:opacity-50'} rounded-lg shadow-xl font-medium text-white px-4 py-2`} disabled={!submitActive} >Post Your Blog</button>
+                            <button type="submit" className={`w-auto ${submitActive ? 'bg-blue-500 hover:bg-blue-700' : 'bg-blue-300 disabled:opacity-50 cursor-not-allowed'} rounded-lg shadow-xl font-medium text-white px-4 py-2`} disabled={!submitActive} >Post Your Blog</button>
                         </div>
 
                     </form>

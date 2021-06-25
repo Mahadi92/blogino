@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import Home from './Pages/Home';
 import LogIn from './Pages/LogIn/LogIn';
-import Navbar from './components/Navbar/Navbar';
 import { createContext, useState } from 'react';
 import PrivateRoute from './Pages/LogIn/PrivateRoute';
 import CreatePost from './components/CreatePost/CreatePost';
@@ -23,7 +22,6 @@ function App() {
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
 
       <Router>
-        <Navbar />
 
         <Switch>
 

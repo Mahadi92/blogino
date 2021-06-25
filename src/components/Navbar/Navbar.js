@@ -13,7 +13,7 @@ const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
     return (
-        <nav className="fixed w-full z-50 glassmorphism text-white navbar">
+        <nav className="w-full z-50 glassmorphism text-white navbar">
             <section className="px-2.5 py-1.5 shadow-md border-md">
                 <main className="flex items-center justify-between">
                     <Link to="/">
@@ -34,7 +34,7 @@ const Navbar = () => {
                                         </svg>
                                     </button>
 
-                                    <ul className={`origin-top-right w-52 absolute mt-2 shadow-lg glassmorphism top-20 rounded-b-lg ${isDropdownOpen ? 'block' : 'hidden'}`}>
+                                    <ul className={`origin-top-right w-52 absolute mt-2 shadow-lg glassmorphism navbar z-50 top-20 rounded-b-lg ${isDropdownOpen ? 'block' : 'hidden'}`}>
                                         <li>
                                             <Link to="/" className="text-gray-700 block px-4 py-2 text-md nav_link hover:bg-gray-200" role="menuitem" tabIndex="-1" id="menu-item-0">TRAVEL</Link>
                                         </li>

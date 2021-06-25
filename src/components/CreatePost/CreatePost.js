@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { UserContext } from '../../App';
 import uploadLoader from '../../images/upload-loading.gif';
+import Navbar from '../Navbar/Navbar';
 
 const CreatePost = () => {
 
@@ -53,7 +54,8 @@ const CreatePost = () => {
 
 
     return (
-        <section className="pt-24">
+        <section className="">
+            <Navbar />
 
             <div className="flex h-screen items-center justify-center  mt-32 mb-32">
                 <div className="grid bg-white rounded-lg shadow-2xl w-11/12 md:w-9/12 lg:w-1/2">

@@ -6,7 +6,7 @@ import "firebase/analytics";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
 import { UserContext } from '../../App';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 
 
@@ -49,6 +49,13 @@ const LogIn = () => {
     return (
         <main>
             <section className="absolute w-full h-full">
+                <div>
+                    <Link to="/" className="glassmorphism backToHomeBtn z-50 absolute right-0 bottom-0.5 m-20 p-5 text-lg text-gray-700 font-bold flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        Back to Home</Link>
+                </div>
                 <div
                     className="absolute top-0 w-full h-full bg-gray-900"
                     style={{
@@ -60,6 +67,7 @@ const LogIn = () => {
                 ></div>
                 <div className="container mx-auto px-4 h-full">
                     <div className="flex content-center items-center justify-center h-full">
+
                         <div className="w-full lg:w-4/12 px-4">
                             <div className="relative flex flex-col min-w-0 break-words w-full shadow-lg rounded-lg border-0 glassmorphism">
                                 <div className="rounded-t mb-0 px-6 py-6">
@@ -180,7 +188,7 @@ const LogIn = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </main >
 
     );
 };

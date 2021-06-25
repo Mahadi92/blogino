@@ -24,3 +24,15 @@ backdrop-filter: blur( 12.0px );
 border-radius: 10px;
 border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
+.backToHomeBtn{
+    background: rgba(255, 255, 255, 0.342);
+    border-radius: 999px;
+    transition: all ease .5s;
+}
+.backToHomeBtn:hover{
+    background: rgba(89, 182, 253, 0.342);
+    margin-right: 100px;
+
+    transition: all ease .5s;
+
+}

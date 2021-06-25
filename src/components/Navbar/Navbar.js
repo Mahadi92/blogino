@@ -56,7 +56,7 @@ const Navbar = () => {
                                     <Link to="/createBlog" className="text-md capitalize nav_link"> CREATE NEW BLOG</Link>
                                 </li>
                                 <li className="bg-red-100 p-3 shadow-md rounded-sm">
-                                    <Link to="/dashboard" className="text-md capitalize nav_link">DASHBOARD</Link>
+                                    <Link to="/dashboard/managePost" className="text-md capitalize nav_link">DASHBOARD</Link>
                                 </li>
                             </ul>
 

@@ -10,6 +10,7 @@ import { createContext, useState } from 'react';
 import PrivateRoute from './Pages/LogIn/PrivateRoute';
 import CreatePost from './components/CreatePost/CreatePost';
 import Dashboard from './Pages/Dashboard';
+import PostDetails from './Pages/PostDetails';
 
 export const UserContext = createContext()
 
@@ -37,11 +38,15 @@ function App() {
             <LogIn />
           </Route>
 
+          <Route path="/post">
+            <PostDetails />
+          </Route>
+
           <PrivateRoute path="/createBlog">
             <CreatePost />
           </PrivateRoute>
 
-          <Route path="/dashboard">
+          <Route path="/dashboard/managePost">
             <Dashboard />
           </Route>
 

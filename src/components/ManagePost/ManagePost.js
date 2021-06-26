@@ -9,7 +9,7 @@ const ManagePost = () => {
     // const [status, setStatus] = useState('unapproved')
 
     const postData = () => {
-        fetch('http://localhost:5000/posts')
+        fetch('https://mighty-mountain-29830.herokuapp.com/posts')
             .then(res => res.json())
             .then(data => setPosts(data))
     }
@@ -21,7 +21,7 @@ const ManagePost = () => {
 
     const handleStatusChange = (id, updateStatus) => {
 
-        fetch(`http://localhost:5000/updateStatus/${id}`, {
+        fetch(`https://mighty-mountain-29830.herokuapp.com/updateStatus/${id}`, {
 
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Sidebar.css';
 import { Link, useRouteMatch } from "react-router-dom";
 import profileImg from '../../images/profileImg.jpg'
+import { UserContext } from '../../App';
 
 
 const Sidebar = () => {
 
-    let { url } = useRouteMatch();
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
 
 
     return (
@@ -16,11 +17,11 @@ const Sidebar = () => {
             <div class="min-h-screen w-full flex flex-col flex-auto flex-shrink-0 antialiased text-gray-800">
                 <div class="fixed flex flex-col top-0 left-0 w-64 bg-gray-900 h-full shadow-lg">
                     <div class="flex items-center pl-6 h-20 border-b border-gray-800">
-                        <img src={profileImg} alt="" class="rounded-full h-10 w-10 flex items-center justify-center mr-3 border-2 border-blue-500 object-cover" />
+                        <img src={loggedInUser.photoURL} alt="" class="rounded-full h-10 w-10 flex items-center justify-center mr-3 border-2 border-blue-500 object-cover" />
                         <div class="ml-1">
-                            <p class="ml-1 text-md font-medium tracking-wide truncate text-gray-100 font-sans">JED DYLAN LEE</p>
+                            <p class="ml-1 text-md font-medium tracking-wide truncate text-gray-100 font-sans">{loggedInUser.displayName}</p>
                             <div class="badge">
-                                <span class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-800 bg-blue-100 rounded-full">Admin</span>
+                                <span class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-800 bg-blue-100 rounded-full">Subscriber</span>
                             </div>
                         </div>
                     </div>

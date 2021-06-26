@@ -38,17 +38,17 @@ function App() {
             <LogIn />
           </Route>
 
-          <Route path="/post">
+          <PrivateRoute path="/post/:postId">
             <PostDetails />
-          </Route>
+          </PrivateRoute>
 
           <PrivateRoute path="/createBlog">
             <CreatePost />
           </PrivateRoute>
 
-          <Route path="/dashboard/managePost">
+          <PrivateRoute path="/dashboard/managePost">
             <Dashboard />
-          </Route>
+          </PrivateRoute>
 
           <Route path="*">
             <Home />
